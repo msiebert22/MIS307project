@@ -1,16 +1,27 @@
+import java.util.*
 
 Public invoice { 
-  Private int Amount;
+  Private int invoiceNum;
+  Private int amount;
   Private String dueDate;
   Private String dates;
   }
-
-Public String getAmount { 
+  
+Public int invoiceNum { 
+    this.invoiceNum = invoiceNum;
+    }
+  
+Public int getAmount { 
   return amount; 
   }  
-Public String getDueDate { 
-  return dueDate;
-  }
+Public void setAmount {
+  this.amount = amount;
+
 Public String getDates { 
   return dates;
   }
+
+Public String getDueDate { 
+  return dueDate;
+  }
+
