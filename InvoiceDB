@@ -1,1 +1,16 @@
 
+Public invoice { 
+  Private int Amount;
+  Private String dueDate;
+  Private String dates;
+  }
+
+Public String getAmount { 
+  return amount; 
+  }  
+Public String getDueDate { 
+  return dueDate;
+  }
+Public String getDates { 
+  return dates;
+  }
