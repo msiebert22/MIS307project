@@ -2,10 +2,13 @@ import java.util.*
 
 public class InvoiceDB {
 	private int invoiceNum;
-	private int amount;
+	private double amount;
 	private String dueDate;
 	private String dates;
 	
+	Public InvoiceDB(int invoiceNum, double amount, String date, String duedate)
+	{
+	}
 	public int getInvoiceNum() { 
 	   return invoiceNum;
 	   }
