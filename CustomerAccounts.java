@@ -1,4 +1,6 @@
-
+/**
+* @author Inno Cabije & Michael Siebert
+*/ 
 public class CustomerAccounts {
 	
 	private String name;
