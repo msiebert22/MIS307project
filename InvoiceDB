@@ -1,27 +1,40 @@
 import java.util.*
 
-Public invoice { 
-  Private int invoiceNum;
-  Private int amount;
-  Private String dueDate;
-  Private String dates;
-  }
-  
-Public int invoiceNum { 
-    this.invoiceNum = invoiceNum;
-    }
-  
-Public int getAmount { 
-  return amount; 
-  }  
-Public void setAmount {
-  this.amount = amount;
+public class InvoiceDB {
+	private int invoiceNum;
+	private int amount;
+	private String dueDate;
+	private String dates;
+	
+	public int getInvoiceNum() { 
+	   return invoiceNum;
+	   }
+	   
+	public void setInvoiceNum(int invoiceNum) {
+	  this.invoiceNum = invoiceNum;
+	  }
+	  
+	public int getAmount() { 
+	  return amount; 
+	  }  
+	  
+	public void setAmount(int amount) {
+	  this.amount = amount;
+	}
 
-Public String getDates { 
-  return dates;
-  }
-
-Public String getDueDate { 
-  return dueDate;
-  }
+	public String getDates() { 
+	  return dates;
+	  }
+	  
+	public void setDates(String dates) {
+	  this.dates = dates;
+	  }
+	  
+	public String getDueDate() { 
+	  return dueDate;
+	  }
+	public void setDueDate(String dueDate) { 
+		this.dueDate = dueDate;	
+	}
+}
 
