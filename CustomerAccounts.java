@@ -1,5 +1,6 @@
 /**
 * @author Inno Cabije & Michael Siebert
+* Customer Accounts is a collection of customers.
 */ 
 public class CustomerAccounts {
 	
