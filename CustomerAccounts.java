@@ -4,7 +4,6 @@
 */ 
 public class CustomerAccounts {
 	
-	private String name;
 	/**
 	 * 7 digits tax ID.
 	 */
@@ -12,16 +11,24 @@ public class CustomerAccounts {
 	/**
 	 * Complete address, example. 123 North Street, Ames Iowa.
 	 */
-	private String address;
-	
-	public CustomerAccounts(String name, int taxID, String address) {
-		this.name = name;
+	public CustomerAccounts( int taxID) {
+
 		this.taxID = taxID;
-		this.address = address;
 	}
 	
-	public void addCustomerAccounts() {
-		
+	public void addCustomerAccounts(String name, String address) throws SQLException
+	{
+		//Need another java class for this. Look at Homework 5 SimpleDataSource
+		try (Connection con = DriverManager.getConnection("", "", ""))
+		{
+			try(PreparedStatement prep = con.prepareStatement("SOME SQL THINGS"))
+			{
+				prep.setString(1, name);
+				prep.setInt(2, taxID);
+				prep.setString(3, address);
+				prep.execute();
+			}
+		}
 	}
 	
 	public void removeCustomerAccount() {
