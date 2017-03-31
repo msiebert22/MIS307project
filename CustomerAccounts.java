@@ -43,12 +43,23 @@ public class CustomerAccounts {
 		
 	}
 	
-	public String getCustomerName()	 {
-		return " "	;
+	public String getCustomerName()	throws SQLException {
+		
+		try (Connection con = DriverManager.getConnection("","","")) 
+		{
+			try (PreparedStatement prep = con.prepareStatement("SOME SQL THINGS / SELECT")) 
+			{
+				prep.setInt(1, taxID);
+				ResultSet result = prep.executeQuery();
+				result.next();
+				
+				return result.getString(2);
+			}
+		}
 	}
 	
 	public int getTaxID() {
-		return 0;
+		return taxID;
 	}
 	
 	public String getAddress() {
