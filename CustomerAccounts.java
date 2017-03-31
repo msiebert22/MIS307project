@@ -12,7 +12,6 @@ public class CustomerAccounts {
 	 * Complete address, example. 123 North Street, Ames Iowa.
 	 */
 	public CustomerAccounts( int taxID) {
-
 		this.taxID = taxID;
 	}
 	
@@ -30,20 +29,17 @@ public class CustomerAccounts {
 			}
 		}
 	}
-	
-	public void removeCustomerAccount() {
+	//Removes a customer via customer name or taxID?
+	public void removeCustomerAccount(String name) throws SQLException {
 		
 	}
-	
-	public void editCustomerName() {
+	//edit a customer. if x is 1 for customername, x is 2 for customer address
+	public void editCustomer(int x) {
 		
 	}
+
 	
-	public void editCustomerAddress() {
-		
-	}
-	
-	public String getCustomerName()	throws SQLException {
+	public String getCustomerName()	throws SQLException throws SQLException {
 		
 		try (Connection con = DriverManager.getConnection("","","")) 
 		{
@@ -62,7 +58,7 @@ public class CustomerAccounts {
 		return taxID;
 	}
 	
-	public String getAddress() {
-		return " ";
+	public String getAddress() throws SQLException{
+		//I think this is unnecessary. Just leave it here for now.
 	}
 }
