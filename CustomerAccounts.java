@@ -53,7 +53,7 @@ public class CustomerAccounts {
 				ResultSet result = prep.executeQuery();
 				result.next();
 				
-				return result.getString(2);
+				return result.getString(1);
 			}
 		}
 	}
