@@ -55,7 +55,7 @@ public class CustomerAccounts {
 	}
 	
 	public int getTaxID() {
-		return taxID;
+		
 	}
 	
 	public String getAddress() throws SQLException{
