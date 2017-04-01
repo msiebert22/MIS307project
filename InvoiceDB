@@ -15,10 +15,6 @@ public class InvoiceDB {
 		* Connect to driver manager and get all information (invoiceNum, dates, dueDates ect.)??
 		*/
 	   }
-	   
-	public void setInvoiceNum(int invoiceNum) {
-	  this.invoiceNum = invoiceNum;
-	  }
 	  
 	public int getAmount() { 
 	  return amount; 
@@ -28,19 +24,21 @@ public class InvoiceDB {
 	  this.amount = amount;
 	}
 
-	public String getDates() { 
+	public String getDates(int invoiceNum) { 
 	  return dates;
 	  }
+	//Before setting, need to look which column of the db we changing.
+	//i'd say we make this the "edit" one instead of setting cuz we already set it on the constructor 
+	public void setInvoiceNum(int invoiceNum) {
 	  
+	  }
+	
 	public void setDates(String dates) {
-	  this.dates = dates;
-	  }
-	  
-	public String getDueDate() { 
-	  return dueDate;
-	  }
+	
+	}
+
 	public void setDueDate(String dueDate) { 
-		this.dueDate = dueDate;	
+		
 	}
 }
 
