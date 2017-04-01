@@ -8,7 +8,7 @@ public class InvoiceDB {
 	
 	Public InvoiceDB(int invoiceNum, double amount, String date, String duedate)
 	{
-		connect this invoice to CustomerAccounts through invoiceNum ???
+		connect this invoice to CustomerAccounts through invoiceNum ??? = We can use the taxID for this one.
 	}
 	public int getInvoiceNum() { 
 		/** 
