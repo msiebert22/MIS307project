@@ -33,8 +33,8 @@ public class CustomerAccounts {
 	public void removeCustomerAccount(String name) throws SQLException {
 		
 	}
-	//edit a customer. if x is 1 for customername, x is 2 for customer address
-	public void editCustomer(int x) {
+	//edit a customer. x = 1 for customername, x = 2 for customer address
+	public void editCustomer(int x, int taxID) {
 		
 	}
 
