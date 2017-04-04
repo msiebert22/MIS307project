@@ -3,10 +3,12 @@ import java.util.*
 public class InvoiceDB {
 	private int invoiceNum; // random assigned invoiceNum for identification
 	private double amount;  // amount customer owes us
+	private int taxID;
 	private String dueDate; // When amount is due
-	private String dates;   // dates for when amount is charged, and due back
+	private String dates;   // dates for when amount is charged, and due back and over due.
 	
-	Public InvoiceDB(int invoiceNum, double amount, String date, String duedate)
+	
+	Public InvoiceDB(int invoiceNum, double amount, String date, String duedate, int taxID)
 	{
 		connect this invoice to CustomerAccounts through invoiceNum ??? = We can use the taxID for this one.
 	}
@@ -15,22 +17,19 @@ public class InvoiceDB {
 		* Connect to driver manager and get all information (invoiceNum, dates, dueDates ect.)??
 		*/
 	   }
-	  
 	public int getAmount() { 
 	  return amount; 
 	  }  
-	  
 	public void setAmount(int amount) {
 	  this.amount = amount;
 	}
-
 	public String getDates(int invoiceNum) { 
 	  return dates;
 	  }
 	//Before setting, need to look which column of the db we changing.
 	//i'd say we make this the "edit" one instead of setting cuz we already set it on the constructor 
-	public void setInvoiceNum(int invoiceNum) {
-	  
+	public void editInvoiceNum(int invoiceNum) {
+		
 	  }
 	
 	public void setDates(String dates) {
