@@ -14,8 +14,20 @@ public class InvoiceDB {
 	}
 	public int getInvoiceNum() { 
 		/** 
-		* Connect to driver manager and get all information (invoiceNum, dates, dueDates ect.)??
+		* Connect to driver manager and get all information (invoiceNum, dates, dueDates ect.)
 		*/
+		try (Connection con = ConnectionDB.getConnection())
+		{ 
+			try(PreparedStatement p = con.preparedStatement("SOME SQL THINGS"))
+			{
+				prep.setInt(1, invoiceNum);
+				prep.setDouble(2, amount);
+				prep.setInt(3, taxID);
+				prep.setString(4, dueDate);
+				prep.setString(5, dates);
+				prep.execute();
+			}
+		}
 	   }
 	public int getAmount() { 
 	  return amount; 
@@ -27,7 +39,7 @@ public class InvoiceDB {
 	  return dates;
 	  }
 	//Before setting, need to look which column of the db we changing.
-	//i'd say we make this the "edit" one instead of setting cuz we already set it on the constructor 
+	//make this the "edit", already set it on the constructor 
 	public void editInvoiceNum(int invoiceNum) {
 		
 	  }
