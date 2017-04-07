@@ -1,4 +1,4 @@
-import java.util.*
+mport java.util.*
 
 public class InvoiceDB {
 	private int invoiceNum; // random assigned invoiceNum for identification
@@ -12,18 +12,30 @@ public class InvoiceDB {
 	{
 		connect this invoice to CustomerAccounts through invoiceNum ??? = We can use the taxID for this one.
 	}
-	public int getInvoiceNum() { 
+	public int getInvoice() { 
 		/** 
 		* Connect to driver manager and get all information (invoiceNum, dates, dueDates ect.)
 		*/
-	   }
+		try (Connection con = ConnectionDB.getConnection())
+		{
+			try(PreparedStatement prep = con.prepareStatement("SOME SQL THINGS"))
+			{
+				prep.setInt(1, invoiceNum);
+				prep.setDouble(2, amount);
+				prep.setInt(3, taxID);
+				prep.setString(4, dueDate);
+				prep.setString(5, dates);
+				prep.execute();
+			}
+	   	}
+	}
 	public int getAmount() { 
 	  return amount; 
 	  }  
 	public void setAmount(int amount) {
 	  this.amount = amount;
 	}
-	public String getDates(int invoiceNum) { 
+	public String getDates(String dates) { 
 	  return dates;
 	  }
 	//Before setting, need to look which column of the db we changing.
@@ -31,11 +43,9 @@ public class InvoiceDB {
 	public void editInvoiceNum(int invoiceNum) {
 		
 	  }
-	
 	public void setDates(String dates) {
 	
 	}
-
 	public void setDueDate(String dueDate) { 
 		
 	}
