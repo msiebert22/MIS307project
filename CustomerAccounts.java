@@ -18,7 +18,7 @@ public class CustomerAccounts {
 	public void addCustomerAccounts(String name, String address) throws SQLException
 	{
 		//Need another java class for this. Look at Homework 5 SimpleDataSource
-		try (Connection con = DriverManager.getConnection("", "", ""))
+		try (Connection con = ConnectionDB.getConnection())
 		{
 			try(PreparedStatement prep = con.prepareStatement("SOME SQL THINGS"))
 			{
@@ -41,7 +41,7 @@ public class CustomerAccounts {
 	
 	public String getCustomerName()	throws SQLException throws SQLException {
 		
-		try (Connection con = DriverManager.getConnection("","","")) 
+		try (Connection con = ConnectionDB.getConnection()) 
 		{
 			try (PreparedStatement prep = con.prepareStatement("SOME SQL THINGS / SELECT")) 
 			{
