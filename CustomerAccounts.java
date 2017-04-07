@@ -20,7 +20,7 @@ public class CustomerAccounts {
 		//Need another java class for this. Look at Homework 5 SimpleDataSource
 		try (Connection con = ConnectionDB.getConnection())
 		{
-			try(PreparedStatement prep = con.prepareStatement("SOME SQL THINGS"))
+			try(PreparedStatement prep = con.prepareStatement("INSERT"))
 			{
 				prep.setString(1, name);
 				prep.setInt(2, taxID);
@@ -29,13 +29,27 @@ public class CustomerAccounts {
 			}
 		}
 	}
-	//Removes a customer via customer name or taxID?
-	public void removeCustomerAccount(String name) throws SQLException {
-		
+	//Removes a customer via customer's taxID
+	public void removeCustomerAccount(int taxID) throws SQLException {
+		try (Connection con = ConnectionDB.getConnection())
+		{
+			try(PreparedStatement prep = con.prepareStatement("DELETE FROM idkDB WHERE TAXID = ?"))
+			{
+				prep.setString(1, taxID);
+				prep.excecute();
+			}
+		}
 	}
-	//edit a customer. x = 1 for customername, x = 2 for customer address
-	public void editCustomer(int x, int taxID) {
-		
+	public void editCustomerName(int taxID, String editedName) {
+		try (Connection con = ConnectionDB.getConnection())
+		{
+			try(PreparedStatement prep = con.prepareStatement("UPDATE CUSTOMERNAME = ? WHERE TAXID = ? "))
+			{
+				prep.setString(1, name);
+				prep.setString(2, taxID);
+				prep.executeUpdate();
+			}
+		}
 	}
 
 	
@@ -53,12 +67,5 @@ public class CustomerAccounts {
 			}
 		}
 	}
-	
-	public int getTaxID() {
-		
-	}
-	
-	public String getAddress() throws SQLException{
-		//I think this is unnecessary. Just leave it here for now.
-	}
+
 }
