@@ -3,7 +3,7 @@ import java.util.*
 public class InvoiceDB {
 	private int invoiceNum; // random assigned invoiceNum for identification
 	private double amount;  // amount customer owes us
-	private int taxID;
+	private int taxID; //
 	private String dueDate; // When amount is due
 	private String dates;   // dates for when amount is charged, and due back and over due.
 	
