@@ -7,11 +7,12 @@ public class InvoiceDB {
 	private String dueDate; // When amount is due
 	private String dates;   // dates for when amount is charged, and due back and over due.
 	
-	
 	Public InvoiceDB(int invoiceNum, double amount, String date, String duedate, int taxID) {
 	}
+	
+	//Connect to driver manager and get all information (invoiceNum, amount, taxID, dates, dueDates)
 	public int getInvoice() { 	
-	//Connect to driver manager and get all information (invoiceNum, amount, taxID, dates, dueDates, )
+	
 		try (Connection con = ConnectionDB.getConnection())
 		{
 			try(PreparedStatement prep = con.prepareStatement("SOME SQL THINGS"))
@@ -25,19 +26,26 @@ public class InvoiceDB {
 			}
 	   	}
 	}
+	
+	//Cannot Edit invoices, must delete and add new. 
+	public void removeInvoice(int invoiceNum) {
+		try (Connection con = ConnectionDB.getConnection())
+		{
+			try(PreparedStatement prep = con.prepareStatement("DELETE FROM invoiceDB WHERE INVOICENUM = ?"))
+			{
+				prep.setInt(1, invoiceNum);
+				prep.setInt(3, taxID);
+				prep.execute();
+	}
+	
 	public int getAmount() { 
-	  return amount; 
+		return amount; 
 	  }  
 	public void setAmount(int amount) {
-	  this.amount = amount;
+		this.amount = amount;
 	}
 	public String getDates(String dates) { 
-	  return dates;
-	  }
-	//Before setting, need to look which column of the db we changing.
-	//make this the "edit", already set it on the constructor 
-	public void editInvoiceNum(int invoiceNum) {
-		
+		return dates;
 	  }
 	public void setDates(String dates) {
 	
