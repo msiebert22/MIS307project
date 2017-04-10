@@ -8,14 +8,10 @@ public class InvoiceDB {
 	private String dates;   // dates for when amount is charged, and due back and over due.
 	
 	
-	Public InvoiceDB(int invoiceNum, double amount, String date, String duedate, int taxID)
-	{
-		connect this invoice to CustomerAccounts through invoiceNum ??? = We can use the taxID for this one.
+	Public InvoiceDB(int invoiceNum, double amount, String date, String duedate, int taxID) {
 	}
-	public int getInvoice() { 
-		/** 
-		* Connect to driver manager and get all information (invoiceNum, dates, dueDates ect.)
-		*/
+	public int getInvoice() { 	
+	//Connect to driver manager and get all information (invoiceNum, amount, taxID, dates, dueDates, )
 		try (Connection con = ConnectionDB.getConnection())
 		{
 			try(PreparedStatement prep = con.prepareStatement("SOME SQL THINGS"))
