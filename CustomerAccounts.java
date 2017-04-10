@@ -1,3 +1,4 @@
+
 /**
 * @author Inno Cabije & Michael Siebert
 * Customer Accounts is a collection of customers.
@@ -13,6 +14,7 @@ public class CustomerAccounts {
 	 */
 	public CustomerAccounts( int taxID) {
 		this.taxID = taxID;
+		// do we want a random generated number for the taxID, or have the user set it?
 	}
 	
 	public void addCustomerAccounts(String name, String address) throws SQLException
