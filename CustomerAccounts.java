@@ -15,6 +15,7 @@ public class CustomerAccounts {
 	public CustomerAccounts( int taxID) {
 		this.taxID = taxID;
 		// do we want a random generated number for the taxID, or have the user set it?
+		//i would say a random number from 1 to 5000. But then again, setting numbers and stuff will go to the main method. we'll see.
 	}
 	
 	public void addCustomerAccounts(String name, String address) throws SQLException
