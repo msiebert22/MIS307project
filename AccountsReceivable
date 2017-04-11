@@ -14,4 +14,30 @@ public static main void(String[] args) {
 	this.taxID = minNum + (int)(Math.random() * ((maxNum - minNum)+ 1));
 	}
     
-    Scanner in = new Scanner(System.in);     
+    Scanner in = new Scanner(System.in); 
+    
+    
+public void create() throws SQLException {
+		
+		try(Connection con = ConnectionDB.getConnection()) {
+			try(Statement s = con.createStatement()) {
+				s.execute("CREATE TABLE ");
+			}
+		}
+	}
+	
+	/**
+	 * Drops the database and if it's empty, throws an exception
+	 * @throws SQLException
+	 */
+	public void droptable() throws SQLException {
+		try(Connection con = ConnectionDB.getConnection()) {
+			try(Statement s = con.createStatement()) {
+				try {
+					s.execute("DROP THE TABLE SQL THING");
+				} catch(SQLException e) {
+					System.out.println("EMPTY TABLE");
+				}
+			}
+		}
+	}
