@@ -1,0 +1,11 @@
+import java.util.*;
+import java.sql.*;
+
+public class AccountsReceivable {
+public static main void(String[] args) {
+  
+    */
+    * Whole bunch of initialized variables
+    /*  
+    
+    Scanner in = new Scanner(System.in);     
