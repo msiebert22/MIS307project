@@ -13,7 +13,7 @@ public class InvoiceDB {
 	}
 	
 	//Connect to driver manager and get all information (invoiceNum, amount, taxID, dates, dueDates)
-	public void getInvoice() throws Exception { 	
+	public void getInvoice() throws SQLException { 	
 		try (Connection con = ConnectionDB.getConnection())
 		{
 			try(PreparedStatement prep = con.prepareStatement("SOME SQL THINGS"))
