@@ -16,14 +16,14 @@ public static void main(String[] args) {
   	int minNum = 1; //Random number generator smallest possible number = 1
 	int maxNum = 50000; //Random number generator largest possible 50000 = 50000;
 	//Generates random number, and assigns it to the taxID.
-  public void setTaxID () {
+  public void setTaxID () {  // Problem, void is invalid type, only FINAL permitted <<<
 	this.taxID = minNum + (int)(Math.random() * ((maxNum - minNum)+ 1));
 	}
     
     Scanner in = new Scanner(System.in); 
     
     
-public void create() throws SQLException {
+public void create() throws SQLException {  // Void is invalid type, & Only FINAL permitted 
 		
 		try(Connection con = ConnectionDB.getConnection()) {
 			try(Statement s = con.createStatement()) {
@@ -36,7 +36,7 @@ public void create() throws SQLException {
 	 * Drops the database and if it's empty, throws an exception
 	 * @throws SQLException
 	 */
-	public void droptable() throws SQLException {
+	public void droptable() throws SQLException {  //AnnotationName expected after "droptable"
 		try(Connection con = ConnectionDB.getConnection()) {
 			try(Statement s = con.createStatement()) {
 				try {
