@@ -1,4 +1,4 @@
-import java.util.*;
+	import java.util.*;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,7 +13,7 @@ public static main void(String[] args) {
     */
     * Whole bunch of initialized variables
     /*  
-  int minNum = 1; //Random number generator smallest possible number = 1
+  	int minNum = 1; //Random number generator smallest possible number = 1
 	int maxNum = 50000; //Random number generator largest possible 50000 = 50000;
 	//Generates random number, and assigns it to the taxID.
   public void setTaxID () {
