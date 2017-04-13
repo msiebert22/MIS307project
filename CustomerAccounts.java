@@ -14,9 +14,6 @@ public class CustomerAccounts {
 	 */
 	public CustomerAccounts( int taxID) {
 		this.taxID = taxID;
-		// do we want a random generated number for the taxID, or have the user set it?
-		//i would say a random number from 1 to 5000. But then again, setting numbers and stuff will go to the main method. 
-		//we'll see.
 	}
 	
 	public void addCustomerAccounts(String name, String address) throws SQLException
@@ -26,8 +23,8 @@ public class CustomerAccounts {
 		{
 			try(PreparedStatement prep = con.prepareStatement("INSERT"))
 			{
-				prep.setString(1, name);
-				prep.setInt(2, taxID);
+				prep.setString(1, taxID);
+				prep.setInt(2, name);
 				prep.setString(3, address);
 				prep.execute();
 			}
@@ -49,8 +46,8 @@ public class CustomerAccounts {
 		{
 			try(PreparedStatement prep = con.prepareStatement("UPDATE CUSTOMERNAME = ? WHERE TAXID = ? "))
 			{
-				prep.setString(1, name);
-				prep.setString(2, taxID);
+				prep.setString(1, taxID);
+				prep.setString(2, name);
 				prep.executeUpdate();
 			}
 		}
