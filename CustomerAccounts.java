@@ -16,17 +16,14 @@ public class CustomerAccounts {
 		this.taxID = taxID;
 	}
 	
-	public void addCustomerAccounts(String name, String address) throws SQLException
+	public void addCustomerAccounts(String name, String street, String city, String state) throws SQLException
 	{
 		//Need another java class for this. Look at Homework 5 SimpleDataSource
 		try (Connection con = ConnectionDB.getConnection())
 		{
 			try(PreparedStatement prep = con.prepareStatement("INSERT"))
 			{
-				prep.setString(1, taxID);
-				prep.setInt(2, name);
-				prep.setString(3, address);
-				prep.execute();
+				
 			}
 		}
 	}
