@@ -1,4 +1,7 @@
-
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 /**
 * @author Inno Cabije & Michael Siebert
 * Customer Accounts is a collection of customers.
