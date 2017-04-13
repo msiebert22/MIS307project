@@ -9,9 +9,7 @@ public class CustomerAccounts {
 	 * 7 digits tax ID.
 	 */
 	private int taxID;
-	/**
-	 * Complete address, example. 123 North Street, Ames Iowa.
-	 */
+
 	public CustomerAccounts( int taxID) {
 		this.taxID = taxID;
 	}
@@ -20,7 +18,8 @@ public class CustomerAccounts {
 	{
 		try (Connection con = ConnectionDB.getConnection())
 		{
-			try(PreparedStatement prep = con.prepareStatement("INSERT INTO CustomerDB (TaxID, CustomerName, CustomerAddressStreet, "
+			try(PreparedStatement prep = con.prepareStatement("INSERT INTO CustomerDB 
+					+ "(TaxID, CustomerName, CustomerAddressStreet,"
 					+ "CustomerAddressCity, CustomerAddressState) VALUES(?,?,?,?,?"))
 			{
 				prep.setInt(1, taxID);
@@ -36,7 +35,7 @@ public class CustomerAccounts {
 	public void removeCustomerAccount(int taxID) throws SQLException {
 		try (Connection con = ConnectionDB.getConnection())
 		{
-			try(PreparedStatement prep = con.prepareStatement("DELETE FROM idkDB WHERE TAXID = ?"))
+			try(PreparedStatement prep = con.prepareStatement("DELETE FROM CustomerDB WHERE TaxID = ?"))
 			{
 				prep.setString(1, taxID);
 				prep.excecute();
@@ -46,29 +45,44 @@ public class CustomerAccounts {
 	public void editCustomerName(int taxID, String editedName) {
 		try (Connection con = ConnectionDB.getConnection())
 		{
-			try(PreparedStatement prep = con.prepareStatement("UPDATE CUSTOMERNAME = ? WHERE TAXID = ? "))
-			{
+			try(try(PreparedStatement prep = con.prepareStatement("UPDATE CustomerDB SET CustomerName = ? 
+									      + "WHERE TaxID = ? "))		{
 				prep.setString(1, taxID);
-				prep.setString(2, name);
+				prep.setString(2, editedName);
 				prep.executeUpdate();
 			}
 		}
 	}
 
 	
-	public String getCustomerName()	throws SQLException throws SQLException {
-		
-		try (Connection con = ConnectionDB.getConnection()) 
-		{
-			try (PreparedStatement prep = con.prepareStatement("SOME SQL THINGS / SELECT")) 
-			{
+	public String getCustomerName()	throws SQLException {		
+		String name;
+		try (Connection con = ConnectionDB.getConnection()) {
+			try (PreparedStatement prep = con.prepareStatement("SELECT CustomerName FROM CustomerDB WHERE TaxID = ?")) {
 				prep.setInt(1, taxID);
 				ResultSet result = prep.executeQuery();
-				result.next();
+				result.next();			
 				
-				return result.getString(1);
+				name = result.getString(2);
 			}
+		} catch (SQLException e) {
+			name = "ERROR!: " + e.getMessage();
 		}
+		return name;	
 	}
-
+	public String getCustomerAddress() throws SQLException {
+		String address;
+		try(Connection con = ConnectionDB.getConnection()){
+			try (PreparedStatement prep = con.prepareStatement("SELECT CustomerAddressStreet, 
+					 + "CustomerAddressCity, CustomerAddressState"
+					 + "FROM CustomerDB WHERE TaxID = ?"))			{
+				prep.setInt(1, taxID);
+				ResultSet r = prep.executeQuery();
+				r.next();
+				address = r.getString(1) + "" + r.getString(2) + "" + r.getString(3);
+			}					
+		} catch (SQLException e) {
+			address = "ERROR!: " + e.getMessage();
+		} 
+		return address;
 }
