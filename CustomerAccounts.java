@@ -21,7 +21,7 @@ public class CustomerAccounts {
 		try (Connection con = ConnectionDB.getConnection())
 		{
 			try(PreparedStatement prep = con.prepareStatement("INSERT INTO CustomerDB (TaxID, CustomerName, CustomerAddressStreet, "
-					+ "CustomerAddressCity, CustomerAddressState) VALUE(?,?,?,?,?"))
+					+ "CustomerAddressCity, CustomerAddressState) VALUES(?,?,?,?,?"))
 			{
 				prep.setInt(1, taxID);
 				prep.setString(2, name);
