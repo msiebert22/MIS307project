@@ -18,12 +18,17 @@ public class CustomerAccounts {
 	
 	public void addCustomerAccounts(String name, String street, String city, String state) throws SQLException
 	{
-		//Need another java class for this. Look at Homework 5 SimpleDataSource
 		try (Connection con = ConnectionDB.getConnection())
 		{
-			try(PreparedStatement prep = con.prepareStatement("INSERT"))
+			try(PreparedStatement prep = con.prepareStatement("INSERT INTO CustomerDB (TaxID, CustomerName, CustomerAddressStreet, "
+					+ "CustomerAddressCity, CustomerAddressState) VALUE(?,?,?,?,?"))
 			{
-				
+				prep.setInt(1, taxID);
+				prep.setString(2, name);
+				prep.setString(3, street);
+				prep.setString(4, city);
+				prep.setString(5, state);
+				prep.execute();
 			}
 		}
 	}
