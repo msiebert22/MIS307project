@@ -65,7 +65,7 @@ public void droptable() throws SQLException {  //AnnotationName expected after "
 		try(Connection con = ConnectionDB.getConnection()) {
 			try(Statement s = con.createStatement()) {
 				try {
-					s.execute("DROP THE TABLE SQL THING");
+					s.execute("DROP TABLE CustomerDB");
 				} catch(SQLException e) {
 					System.out.println("EMPTY TABLE");
 				}
