@@ -23,11 +23,23 @@ public static void main(String[] args) {
     Scanner in = new Scanner(System.in); 
     
     
-public void create() throws SQLException {  // Void is invalid type, & Only FINAL permitted 
+public void createCustomerDB() throws SQLException {  // Void is invalid type, & Only FINAL permitted 
 		
 		try(Connection con = ConnectionDB.getConnection()) {
 			try(Statement s = con.createStatement()) {
-				s.execute("CREATE TABLE ");
+				s.execute("CREATE TABLE TaxID INT, CustomerName VARCHAR(40), CustomerAddressStreet VARCHAR(40), "
+						+ "CustomerAddressCity VARCHAR(40), CustomerAddressState VARCHAR(2)");
+				
+				int taxID[] = {0001,0002,0003};
+				String CustomerNames[] = {"Gabe Newell", "Dwyane Wade", "Bill Clinton"};
+				String CustomerStreet[] = {"1121 North St", "0002 Bulls St.", "1111 Waht St."};
+				String CustomerCity[] = {"Seattle", "Chicago", "New York City"};
+				String CustomerState[] = {"WA", "IL", "NY"};
+				
+				for(int i = 0;  i < taxID.length; i++)	{
+					CustomerAccounts CA = new CustomerAccounts(taxID[i]);
+					CA.addCustomerAccounts(CustomerNames[i], CustomerStreet[i], CustomerCity[i], CustomerState[i]);
+				}
 			}
 		}
 	}
