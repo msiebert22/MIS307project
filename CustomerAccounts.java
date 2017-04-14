@@ -4,19 +4,30 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 /**
 * @author Inno Cabije & Michael Siebert
-* Customer Accounts is a collection of customers.
+* Customer Accounts is a collection of customers. 
+* CustomerAccounts class is the class that stores all of the customer's identification to the database
 */ 
 public class CustomerAccounts {
 	
 	/**
-	 * 7 digits tax ID.
+	 * 4 digits tax ID.
 	 */
 	private int taxID;
-
+	/**
+	 * The constructor of the class. Initializes with the taxID of a customer.
+	 * @param taxID - taxID is the primary key.
+	 */
 	public CustomerAccounts( int taxID) {
 		this.taxID = taxID;
 	}
-	
+	/**
+	 * This method adds a single customer to the database.
+	 * @param name - The customer's name. First then last name.
+	 * @param street - The street and house number of the customer. eg. 123 North St.
+	 * @param city - City where the customer lives
+	 * @param state - State which the customer lives. Two letters. eg. "IA" for Iowa
+	 * @throws SQLException
+	 */
 	public void addCustomerAccounts(String name, String street, String city, String state) throws SQLException
 	{
 		try (Connection con = ConnectionDB.getConnection())
@@ -34,7 +45,11 @@ public class CustomerAccounts {
 			}
 		}
 	}
-	//Removes a customer via customer's taxID
+	/**
+	 * This method removes a customer from the database by using the taxID.
+	 * @param taxID
+	 * @throws SQLException
+	 */
 	public void removeCustomerAccount(int taxID) throws SQLException {
 		try (Connection con = ConnectionDB.getConnection())
 		{
@@ -45,6 +60,12 @@ public class CustomerAccounts {
 			}
 		}
 	}
+	/**
+	 * This method edits a customer's name.
+	 * @param taxID - primary key
+	 * @param editedName - the updated name of a customer. First name then last name.
+	 * @throws SQLException
+	 */	
 	public void editCustomerName(int taxID, String editedName) {
 		try (Connection con = ConnectionDB.getConnection())
 		{
@@ -56,7 +77,11 @@ public class CustomerAccounts {
 			}
 		}
 	}
-
+	/**
+	 * This method gets a customer name from the database
+	 * @return - returns the customer name.
+	 * @throws SQLException
+	 */
 	
 	public String getCustomerName()	throws SQLException {		
 		String name;
@@ -73,6 +98,11 @@ public class CustomerAccounts {
 		}
 		return name;	
 	}
+	/**
+	 * This method gets the street, city then state or the complete address of the customer.
+	 * @return the completed address of a customer.
+	 * @throws SQLException
+	 */
 	public String getCustomerAddress() throws SQLException {
 		String address;
 		try(Connection con = ConnectionDB.getConnection()){
