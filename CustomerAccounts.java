@@ -32,7 +32,7 @@ public class CustomerAccounts {
 	{
 		try (Connection con = ConnectionDB.getConnection())
 		{
-			try(PreparedStatement prep = con.prepareStatement("INSERT INTO CustomerDB 
+			try(PreparedStatement prep = con.prepareStatement("INSERT INTO CustomerDB"
 					+ "(TaxID, CustomerName, CustomerAddressStreet,"
 					+ "CustomerAddressCity, CustomerAddressState) VALUES(?,?,?,?,?"))
 			{
@@ -69,7 +69,7 @@ public class CustomerAccounts {
 	public void editCustomerName(int taxID, String editedName) {
 		try (Connection con = ConnectionDB.getConnection())
 		{
-			try(PreparedStatement prep = con.prepareStatement("UPDATE CustomerDB SET CustomerName = ? 
+			try(PreparedStatement prep = con.prepareStatement("UPDATE CustomerDB SET CustomerName = ?" 
 									      + "WHERE TaxID = ? "))		{
 				prep.setString(1, taxID);
 				prep.setString(2, editedName);
@@ -106,7 +106,7 @@ public class CustomerAccounts {
 	public String getCustomerAddress() throws SQLException {
 		String address;
 		try(Connection con = ConnectionDB.getConnection()){
-			try (PreparedStatement prep = con.prepareStatement("SELECT CustomerAddressStreet, 
+			try (PreparedStatement prep = con.prepareStatement("SELECT CustomerAddressStreet," 
 					 + "CustomerAddressCity, CustomerAddressState"
 					 + "FROM CustomerDB WHERE TaxID = ?"))			{
 				prep.setInt(1, taxID);
