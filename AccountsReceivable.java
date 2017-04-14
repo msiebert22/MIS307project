@@ -8,32 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class AccountsReceivable {
-	private static int taxID;
+		
 public static void main(String[] args) {
-  
-	
-	//Generates random number, and assigns it to the taxID.
-    // Problem, void is invalid type, only FINAL permitted <<<
 
-	int taxID1 =  RandomTaxID();
-	System.out.println(taxID1);
-    Scanner in = new Scanner(System.in); 
-    
 }
-/**
- * If new, get a random Tax ID.
- * @param tax_ID
- * @return tax id
- */
-public static int RandomTaxID() {  //Delete this mathod?
-	
-	int minNum = 1; //Random number generator smallest possible number = 1
-	int maxNum = 5000; //Random number generator largest possible 50000 = 50000;
-	taxID = minNum + (int)(Math.random() * ((maxNum - minNum)+ 1));
-	
-	return taxID;
-	
-}
+
 
 public void createCustomerDB() throws SQLException {  // Void is invalid type, & Only FINAL permitted 
 		
