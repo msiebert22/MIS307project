@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class AccountsReceivable {
 		
 public static void main(String[] args) {
-	
+	//Some test stuff. checking if db is working 
 	//to create the table
 	//createcustomerDB();
 	
