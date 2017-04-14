@@ -69,7 +69,7 @@ public class CustomerAccounts {
 	public void editCustomerName(int taxID, String editedName) {
 		try (Connection con = ConnectionDB.getConnection())
 		{
-			try(try(PreparedStatement prep = con.prepareStatement("UPDATE CustomerDB SET CustomerName = ? 
+			try(PreparedStatement prep = con.prepareStatement("UPDATE CustomerDB SET CustomerName = ? 
 									      + "WHERE TaxID = ? "))		{
 				prep.setString(1, taxID);
 				prep.setString(2, editedName);
