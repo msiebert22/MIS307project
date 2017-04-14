@@ -40,7 +40,7 @@ public static void createCustomerDB() throws SQLException {  // Void is invalid 
 				s.execute("CREATE TABLE CustomerDB (TaxID INTEGER, CustomerName VARCHAR(40), CustomerAddressStreet VARCHAR(40), "
 						+ "CustomerAddressCity VARCHAR(40), CustomerAddressState VARCHAR(2))");
 				
-				int taxID[] = {0001,0002,0003};
+				int taxID[] = {1001,1002,1003};
 				String CustomerNames[] = {"Gabe Newell", "Dwyane Wade", "Bill Clinton"};
 				String CustomerStreet[] = {"1121 North St", "0002 Bulls St.", "1111 Waht St."};
 				String CustomerCity[] = {"Seattle", "Chicago", "New York City"};
