@@ -1,4 +1,3 @@
-
 import java.util.*;
 import java.sql.*;
 import java.sql.Connection;
@@ -26,7 +25,7 @@ public static void main(String[] args) {
  * @param tax_ID
  * @return tax id
  */
-public static int RandomTaxID() {
+public static int RandomTaxID() {  //Delete this mathod?
 	
 	int minNum = 1; //Random number generator smallest possible number = 1
 	int maxNum = 5000; //Random number generator largest possible 50000 = 50000;
