@@ -47,7 +47,7 @@ public class CustomerAccounts {
 	}
 	/**
 	 * This method removes a customer from the database by using the taxID.
-	 * @param taxID
+	 * @param taxID - uses taxID to find which customer should be removed.
 	 * @throws SQLException
 	 */
 	public void removeCustomerAccount(int taxID) throws SQLException {
@@ -62,7 +62,7 @@ public class CustomerAccounts {
 	}
 	/**
 	 * This method edits a customer's name.
-	 * @param taxID - primary key
+	 * @param taxID -uses taxID to find which customer will be edited
 	 * @param editedName - the updated name of a customer. First name then last name.
 	 * @throws SQLException
 	 */	
