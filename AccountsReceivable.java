@@ -10,15 +10,34 @@ import java.util.ArrayList;
 public class AccountsReceivable {
 		
 public static void main(String[] args) {
+	
+	//to create the table
+	//createcustomerDB();
+	
+	//to delete/drop the table
+	//droptable();
+	
+	Connection con = ConnectionDB.getConnection();
+	Statement s = con.createStatement();
+	ResultSet r = s.executeQuery("SELECT TaxID, CustomerName, CustomerAddressState FROM CustomerDB");
+	ResultSetMetaData rs = r.getMetaData();
 
+	int col = rs.getColumnCount();
+
+	while(r.next()) {
+		for(int i = 1; i <=col; i++) {
+			System.out.println(r.getString(i) + " ");
+		}
+			System.out.println();
+	}
 }
 
 
-public void createCustomerDB() throws SQLException {  // Void is invalid type, & Only FINAL permitted 
+public static void createCustomerDB() throws SQLException {  // Void is invalid type, & Only FINAL permitted 
 		
 		try(Connection con = ConnectionDB.getConnection()) {
 			try(Statement s = con.createStatement()) {
-				s.execute("CREATE TABLE CustomerDB (TaxID INT, CustomerName VARCHAR(40), CustomerAddressStreet VARCHAR(40), "
+				s.execute("CREATE TABLE CustomerDB (TaxID INTEGER, CustomerName VARCHAR(40), CustomerAddressStreet VARCHAR(40), "
 						+ "CustomerAddressCity VARCHAR(40), CustomerAddressState VARCHAR(2))");
 				
 				int taxID[] = {0001,0002,0003};
@@ -39,7 +58,7 @@ public void createCustomerDB() throws SQLException {  // Void is invalid type, &
 	 * Drops the database and if it's empty, throws an exception
 	 * @throws SQLException
 	 */
-public void droptable() throws SQLException {  //AnnotationName expected after "droptable"
+public static void droptable() throws SQLException {  //AnnotationName expected after "droptable"
 		try(Connection con = ConnectionDB.getConnection()) {
 			try(Statement s = con.createStatement()) {
 				try {
