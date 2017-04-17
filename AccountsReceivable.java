@@ -8,21 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class AccountsReceivable {
-		
-public static void main(String[] args) {
-	//Some test stuff. checking if db is working 
-	//to create the table
-	//createcustomerDB();
-	
-	//to delete/drop the table
-	//droptable();
-	
-	Connection con = ConnectionDB.getConnection();
-	Statement s = con.createStatement();
-	ResultSet r = s.executeQuery("SELECT TaxID, CustomerName, CustomerAddressState FROM CustomerDB");
-	ResultSetMetaData rs = r.getMetaData();
 
-	int col = rs.getColumnCount();
+public static void main(String[] args) throws SQLException {	
+	
+Connection con = ConnectionDB.getConnection();
+Statement s = con.createStatement();
+ResultSet r = s.executeQuery("SELECT TaxID, CustomerName, CustomerAddressState FROM CustomerDB");
+ResultSetMetaData rs = r.getMetaData();
+
+int col = rs.getColumnCount();
 
 	while(r.next()) {
 		for(int i = 1; i <=col; i++) {
@@ -32,13 +26,16 @@ public static void main(String[] args) {
 	}
 }
 
-
-public static void createCustomerDB() throws SQLException {  // Void is invalid type, & Only FINAL permitted 
+public static void createCustomerDB() throws SQLException {  
 		
 		try(Connection con = ConnectionDB.getConnection()) {
 			try(Statement s = con.createStatement()) {
-				s.execute("CREATE TABLE CustomerDB (TaxID INTEGER, CustomerName VARCHAR(40), CustomerAddressStreet VARCHAR(40), "
-						+ "CustomerAddressCity VARCHAR(40), CustomerAddressState VARCHAR(2))");
+				try {
+					s.execute("DROP TABLE CustomerDB") ;
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+				s.execute("CREATE TABLE CustomerDB (TaxID INTEGER, CustomerName VARCHAR(40), CustomerAddressStreet VARCHAR(40), CustomerAddressCity VARCHAR(40), CustomerAddressState VARCHAR(2))");
 				
 				int taxID[] = {1001,1002,1003};
 				String CustomerNames[] = {"Gabe Newell", "Dwyane Wade", "Bill Clinton"};
@@ -53,20 +50,36 @@ public static void createCustomerDB() throws SQLException {  // Void is invalid 
 			}
 		}
 	}
-	
+
 	/**
 	 * Drops the database and if it's empty, throws an exception
 	 * @throws SQLException
 	 */
-public static void droptable() throws SQLException {  //AnnotationName expected after "droptable"
-		try(Connection con = ConnectionDB.getConnection()) {
-			try(Statement s = con.createStatement()) {
-				try {
-					s.execute("DROP TABLE CustomerDB");
-				} catch(SQLException e) {
-					System.out.println("EMPTY TABLE");
-				}
+public static void createInvoiceDB() throws SQLException {
+	try(Connection con = ConnectionDB.getConnection()) {
+		try(Statement s = con.createStatement()) {
+			try {
+				s.execute("DROP TABLE InvoiceDB");		
+			} catch (SQLException e ) {
+				System.out.println(e.getMessage());
 			}
+			
+			s.execute("CREATE TABLE InvoiceDB (InvoiceNum INTEGER, InvoiceAmount DOUBLE, InvoiceDate VAR(10), Invoice_DueDate VAR(10)");
+			
+			int invoiceNum[] = {2001, 2002, 2003};
+			int taxID[] = {1001, 1002,1003};
+			double invoiceAmount[] = {23.56, 112.50, 500.60};
+			String invoiceDates[] = {"20/02/08", "10/01/09", "05/12/10"};
+			String invoice_DueDates[] = {"30/12/08", "30/11/10", "05/12/11"};
+			
+			for(int i = 0; i < invoiceNum.length; i++ ){
+				InvoiceDB x = new InvoiceDB(invoiceNum[i]);
+				x.addInvoice(taxID[i],invoiceAmount[i], invoiceDates[i], invoice_DueDates[i]);
+			}
+			
 		}
 	}
+}
+
+
 }
