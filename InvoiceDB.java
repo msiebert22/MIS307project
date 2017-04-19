@@ -52,9 +52,10 @@ public class InvoiceDB {
 		return dates;
 	  }
 	public void setDates(String dates) {
-
+		this.dates = dates;
 	}
 	public void setDueDate(String dueDate) { 
+		this.dueDate = dueDates;
 	}
 
 }
