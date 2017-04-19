@@ -11,10 +11,10 @@ public class AccountsReceivable {
 
 public static void main(String[] args) throws SQLException {	
 	
-Connection con = ConnectionDB.getConnection();
-Statement s = con.createStatement();
-ResultSet r = s.executeQuery("SELECT TaxID, CustomerName, CustomerAddressState FROM CustomerDB");
-ResultSetMetaData rs = r.getMetaData();
+	Connection con = ConnectionDB.getConnection();
+	Statement s = con.createStatement();
+	ResultSet r = s.executeQuery("SELECT TaxID, CustomerName, CustomerAddressState FROM CustomerDB");
+	ResultSetMetaData rs = r.getMetaData();
 
 int col = rs.getColumnCount();
 
