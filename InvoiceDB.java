@@ -4,7 +4,7 @@ import java.sql.*;
 public class InvoiceDB {
 	private int invoiceNum; // random assigned invoiceNum for identification
 	private double amount;  // amount customer owes us
-	private int taxID; //
+	private int taxID; // TaxID customer identifies with
 	private String dueDate; // When amount is due
 	private String dates;   // dates for when amount is charged, and due back and over due.
 	
@@ -16,7 +16,8 @@ public class InvoiceDB {
 	public void getInvoice() throws SQLException { 	
 		try (Connection con = ConnectionDB.getConnection())
 		{
-			try(PreparedStatement prep = con.prepareStatement("SOME SQL THINGS"))
+			try(PreparedStatement prep = con.prepareStatement
+			    + ("SELECT invoice FROM invoiceDB WHERE invoiceNum = ?"))
 			{
 				prep.setInt(1, invoiceNum);
 				prep.setDouble(2, amount);
@@ -31,7 +32,8 @@ public class InvoiceDB {
 	public void removeInvoice(int invoiceNum) throws SQLException {
 		try (Connection con = ConnectionDB.getConnection())
 		{
-			try(PreparedStatement prep = con.prepareStatement("DELETE FROM invoiceDB WHERE INVOICENUM = ?"))
+			try(PreparedStatement prep = con.prepareStatement
+			    + ("DELETE invoice FROM invoiceDB WHERE INVOICENUM = ?"))
 			{
 				prep.setInt(1, invoiceNum);
 				prep.setInt(3, taxID);
