@@ -2,14 +2,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
-
 public class ConnectionDB {
 
 	  private static String url = "jdbc:derby:BigJavaDB;create=true";
-	  private static String username = " ";
+	  private static String username = "admin";
 	  private static String driverName = "org.apache.derby.jdbc.EmbeddedDriver";
-	  private static String password = " ";
+	  private static String password = "secret";
 	  private static Connection connection;
 		  
 	public static Connection getConnection() throws SQLException 
@@ -27,6 +25,5 @@ public class ConnectionDB {
 		}
 		return connection;
 	}
-		    
-		 
 }
+
