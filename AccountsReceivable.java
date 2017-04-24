@@ -1,135 +1,114 @@
-import java.sql.Statement;
+import java.util.*;
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-
-
-public class InvoiceDB {
+import java.util.Scanner;
+public class AccountsReceivable {
+	private static InvoiceDB ii;
+	public static void main(String[] args) throws SQLException {	
 	
-	private int invoiceNum;
-	
-	public InvoiceDB(int invoice_Num) throws SQLException {
-		invoiceNum = invoice_Num;
-	}
-	
-	public void addInvoice(int taxID, double amount, String date, String dueDate)
-				throws SQLException  
-	{
-		try(Connection con = ConnectionDB.getConnection()) {
-			try(PreparedStatement prep = con.prepareStatement("INSERT INTO InvoiceDB (InvoiceNum, TaxID, InvoiceAmount, "
-					+ "InvoiceDate, Invoice_DueDate) VALUES(?,?,?,?,?)")) {
-				prep.setInt(1, invoiceNum);
-				prep.setInt(2, taxID);
-				prep.setDouble(3, amount);
-				prep.setString(4, date);
-				prep.setString(5, dueDate);
-				prep.execute();
-				
-			}
-		}
-	}
-	
-	public void removeInvoice(int invoice_Num) throws SQLException {
-		try(Connection con = ConnectionDB.getConnection()) {
-			try(PreparedStatement prep = con.prepareStatement("DELETE FROM InvoiceDB WHERE InvoiceNum = ?")) {
-				prep.setInt(1, invoice_Num);
-				prep.executeUpdate();
-			}
-		}
-	}
-	/**
-	 * Additional payments from a customer.
-	 * Amounts received from customers for invoice 
-	 * @amount - the additional amount a customer paid
-	 * @throws SQLException
-	 */
-	public void amountsReceived(double amounts) throws SQLException {
-		try(Connection con = ConnectionDB.getConnection()) {
-			try(PreparedStatement prep = con.prepareStatement("UPDATE InvoiceDB SET InvoiceAmount = ?  "
-					+ "WHERE InvoiceNum = ?")) {
-				prep.setDouble(1,  - amounts);
-				prep.setInt(2, invoiceNum);
-				prep.executeUpdate();
-			}
-		}
-	}
-
-	public ArrayList<Integer> getInvoiceAmounts() throws SQLException {
-		ArrayList<Integer> a = new ArrayList<Integer>();
-		try(Connection con = ConnectionDB.getConnection()) {
-			try(Statement s = con.createStatement()) {
-				ResultSet re = s.executeQuery("SELECT InvoiceAmount FROM InvoiceDB");
-				while(re.next()) {
-					a.add(re.getInt(1));		
-				}
-			}
-		}
-		return a;
+		createInvoiceDB();
 		
+		InvoiceDB iv = new InvoiceDB(5004);
+		
+		iv.addInvoice(1004, 10.50, "10/10/10", "11/10/10");
+		iv.amountsReceived(10.50);
+		
+		for(int i = 0; i < iv.getInvoiceNumbers().size(); i++) {
+			String checkifPaid = iv.checkifPaid(iv.getInvoiceNumbers().get(i));
+			ii = new InvoiceDB(iv.getInvoiceNumbers().get(i));		
+			System.out.println(ii.toString());
+			System.out.println("Y if paid and N for not yet paid: " + iv.getInvoiceNumbers().get(i) + " " + checkifPaid);
+		}
+		System.out.println();
+		
+		
+		for(int i = 0; i < iv.getInvoiceNumbers().size(); i++) {
+			
+		}
+	
+		
+	
+
+		
+		
+//		Connection con = ConnectionDB.getConnection();
+//		Statement s = con.createStatement();
+//		ResultSet r = s.executeQuery("SELECT InvoiceNum, TaxID, InvoiceAmount, InvoiceDate, Invoice_DueDate FROM InvoiceDB");
+//		ResultSetMetaData rs = r.getMetaData();
+//		
+//		int col = rs.getColumnCount();
+//		
+//				while(r.next()) {
+//					for(int i = 1; i <=col; i++) {
+//						System.out.println(r.getString(i) + " ");
+//					}
+//						System.out.println();
+//				}
+	
 	}
 	/**
-	 * Check whether a certain taxID is already paid or not.
-	 * If the amount is zero then it is paid, otherwise not paid.
-	 * @param taxID - taxID of a customer.
-	 * @return Y for already paid. N for not yet paid
+	 * Creates the customer database.
 	 * @throws SQLException
 	 */
-	public String checkifPaid(int invoice_Num) throws SQLException {
-		String status = "";
-		try (Connection con = ConnectionDB.getConnection()) {
-			try (PreparedStatement prep = con.prepareStatement("SELECT InvoiceAmount FROM InvoiceDB WHERE InvoiceNum = ?")) {
-				
-				prep.setInt(1, invoice_Num);
-				ResultSet rs = prep.executeQuery();
-				while(rs.next()) {
-					if(rs.getDouble(1) > 0) {
-						status = "N";
-					} else {
-						status = "Y";
+	public static void createCustomerDB() throws SQLException {  
+			
+			try(Connection con = ConnectionDB.getConnection()) {
+				try(Statement s = con.createStatement()) {
+					try {
+						s.execute("DROP TABLE CustomerDB") ;
+					} catch (SQLException e) {
+						System.out.println(e.getMessage());
+					}
+					s.execute("CREATE TABLE CustomerDB (TaxID INTEGER PRIMARY KEY, CustomerName VARCHAR(40), CustomerAddressStreet VARCHAR(40), CustomerAddressCity VARCHAR(40), CustomerAddressState VARCHAR(2))");
+					
+					int taxID[] = {1001,1002,1003};
+					String CustomerNames[] = {"Gabe Newell", "Dwyane Wade", "Bill Clinton"};
+					String CustomerStreet[] = {"1121 North St", "0002 Bulls St.", "1111 Waht St."};
+					String CustomerCity[] = {"Seattle", "Chicago", "New York City"};
+					String CustomerState[] = {"WA", "IL", "NY"};
+					
+					for(int i = 0;  i < taxID.length; i++)	{
+						CustomerAccounts CA = new CustomerAccounts(taxID[i]);
+						CA.addCustomerAccounts(CustomerNames[i], CustomerStreet[i], CustomerCity[i], CustomerState[i]);
 					}
 				}
-			}		
-		}
-		
-		return status;
-	}
-	
-	public ArrayList<Integer> getInvoiceNumbers() throws SQLException {
-		ArrayList<Integer> invoiceNums = new ArrayList<Integer>();
-		try (Connection con = ConnectionDB.getConnection()) {
-			try(Statement s = con.createStatement()) {
-				ResultSet result = s.executeQuery("SELECT InvoiceNum FROM InvoiceDB");
-				while(result.next()) {
-					invoiceNums.add(result.getInt(1));
-				}
 			}
+			//System.out.println("CREATED");
 		}
-		return invoiceNums;
-	}
 
-	
-	public String toString() 
-	{
-		String string ;
-		try(Connection con = ConnectionDB.getConnection()) 
-		{		
-			try(PreparedStatement s = con.prepareStatement("SELECT TaxID, InvoiceAmount, InvoiceDate, Invoice_DueDate FROM InvoiceDB WHERE InvoiceNum = ?"))
-			{
-				s.setInt(1, invoiceNum);
-				ResultSet r = s.executeQuery();
-				r.next();
-				string = String.format("Invoice: %d TaxID: %d Amount: %.2f Date: %s DueDate: %s", invoiceNum, r.getInt(1), r.getDouble(2), r.getString(3), r.getString(4));
+	/**
+	 * Creates the invoice database. 
+	 * @throws SQLException
+	 */
+	public static void createInvoiceDB() throws SQLException {
+		try(Connection con = ConnectionDB.getConnection()) {
+			try(Statement s = con.createStatement()) {
+				try {
+					s.execute("DROP TABLE InvoiceDB");		
+				} catch (SQLException e ) {
+					System.out.println(e.getMessage());
+				}	
+				s.execute("CREATE TABLE InvoiceDB (InvoiceNum INTEGER, TaxID INTEGER, InvoiceAmount DECIMAL(10,2), InvoiceDate VARCHAR(10), Invoice_DueDate VARCHAR(10))");
+				
+				int invoiceNum[] = {5001, 5002, 5003};
+				int taxID[] = {1001, 1002,1003};
+				double invoiceAmount[] = {23.56, 112.50, 500.60};
+				String invoiceDates[] = {"20/02/08", "10/01/09", "05/12/10"};
+				String invoice_DueDates[] = {"30/12/08", "30/11/10", "05/12/11"};
+				
+				for(int i = 0; i < invoiceNum.length; i++ ){
+					InvoiceDB x = new InvoiceDB(invoiceNum[i]);
+					x.addInvoice(taxID[i],invoiceAmount[i], invoiceDates[i], invoice_DueDates[i]);
+				}
 				
 			}
 		}
-		catch (SQLException e) {
-			string = "SQLException!: " + e.getMessage();
-		}
-		return string;
+		//System.out.println("CREATED DATABASE FOR INVOICE");
 	}
-
 
 }
