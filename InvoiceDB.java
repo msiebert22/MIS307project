@@ -86,9 +86,9 @@ public class InvoiceDB {
 				ResultSet rs = prep.executeQuery();
 				while(rs.next()) {
 					if(rs.getDouble(1) > 0) {
-						status = "N";
+						status = "No";
 					} else {
-						status = "Y";
+						status = "Yes";
 					}
 				}
 			}		
