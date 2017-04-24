@@ -98,8 +98,8 @@ public class AccountsReceivable {
 				int invoiceNum[] = {5001, 5002, 5003};
 				int taxID[] = {1001, 1002,1003};
 				double invoiceAmount[] = {23.56, 112.50, 500.60};
-				String invoiceDates[] = {"20/02/08", "10/01/09", "05/12/10"};
-				String invoice_DueDates[] = {"30/12/08", "30/11/10", "05/12/11"};
+				String invoiceDates[] = {"09/02/10", "10/01/10", "05/12/10"};
+				String invoice_DueDates[] = {"10/12/10", "11/11/10", "05/25/10"};
 				
 				for(int i = 0; i < invoiceNum.length; i++ ){
 					InvoiceDB x = new InvoiceDB(invoiceNum[i]);
