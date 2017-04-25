@@ -5,16 +5,36 @@ import java.sql.ResultSetMetaData;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+/**
+ * Invoice Database class.
+ * @author Inno & Michael
+ *	@date 4/21/2017
+ */
 
 public class InvoiceDB {
 	
+	/**
+	 * Invoice Number
+	 */
 	private int invoiceNum;
 	
+	/**
+	 * Invoice class constructor. Initializes a invoice number.
+	 * @param invoice_Num - primary key
+	 * @throws SQLException
+	 */
 	public InvoiceDB(int invoice_Num) throws SQLException {
 		invoiceNum = invoice_Num;
 	}
 	
+	/**
+	 * Adds the invoice's to the database.
+	 * @param taxID - taxID of the customer who did the invoice
+	 * @param amount - The amount that the invoice has
+	 * @param date - The date when the invoice was received
+	 * @param dueDate - the due date of the invoice. the date where the customer has to pay.
+	 * @throws SQLException
+	 */
 	public void addInvoice(int taxID, double amount, String date, String dueDate)
 				throws SQLException  
 	{
@@ -26,12 +46,15 @@ public class InvoiceDB {
 				prep.setDouble(3, amount);
 				prep.setString(4, date);
 				prep.setString(5, dueDate);
-				prep.execute();
-				
+				prep.execute();				
 			}
 		}
 	}
-	
+	/**
+	 * Removes a certain invoice from the database
+	 * @param invoice_Num - The primary key
+	 * @throws SQLException
+	 */
 	public void removeInvoice(int invoice_Num) throws SQLException {
 		try(Connection con = ConnectionDB.getConnection()) {
 			try(PreparedStatement prep = con.prepareStatement("DELETE FROM InvoiceDB WHERE InvoiceNum = ?")) {
@@ -44,35 +67,25 @@ public class InvoiceDB {
 	 * Additional payments from a customer.
 	 * Amounts received from customers for invoice 
 	 * @amount - the additional amount a customer paid
+	 * @invoice_Num - Invoice Number
 	 * @throws SQLException
 	 */
-	public void amountsReceived(double amounts) throws SQLException {
+	public void amountsReceived(int invoice_Num, double amounts) throws SQLException {
 		try(Connection con = ConnectionDB.getConnection()) {
-			try(PreparedStatement prep = con.prepareStatement("UPDATE InvoiceDB SET InvoiceAmount = ?  "
+			try(PreparedStatement prep = con.prepareStatement("UPDATE InvoiceDB SET InvoiceAmount = InvoiceAmount - ?  "
 					+ "WHERE InvoiceNum = ?")) {
-				prep.setDouble(1,  - amounts);
-				prep.setInt(2, invoiceNum);
+				
+				prep.setDouble(1,  amounts);
+				prep.setInt(2, invoice_Num);
+				
 				prep.executeUpdate();
 			}
 		}
 	}
-
-	public ArrayList<Integer> getInvoiceAmounts() throws SQLException {
-		ArrayList<Integer> a = new ArrayList<Integer>();
-		try(Connection con = ConnectionDB.getConnection()) {
-			try(Statement s = con.createStatement()) {
-				ResultSet re = s.executeQuery("SELECT InvoiceAmount FROM InvoiceDB");
-				while(re.next()) {
-					a.add(re.getInt(1));		
-				}
-			}
-		}
-		return a;
-		
-	}
 	/**
 	 * Check whether a certain taxID is already paid or not.
 	 * If the amount is zero then it is paid, otherwise not paid.
+	 * Uses the removeInvoice if it is already paid.
 	 * @param taxID - taxID of a customer.
 	 * @return Y for already paid. N for not yet paid
 	 * @throws SQLException
@@ -85,18 +98,21 @@ public class InvoiceDB {
 				prep.setInt(1, invoice_Num);
 				ResultSet rs = prep.executeQuery();
 				while(rs.next()) {
-					if(rs.getDouble(1) > 0) {
-						status = "No";
+					if(rs.getDouble(1) <= 0) {
+						status = "Yes";					
 					} else {
-						status = "Yes";
+						status = "No";	
 					}
 				}
 			}		
-		}
-		
+		}		
 		return status;
 	}
-	
+	/**
+	 * Creates an Arraylist of Invoice Numbers from the database.
+	 * @return - an arraylist of integer/invoicenumbers
+	 * @throws SQLException
+	 */
 	public ArrayList<Integer> getInvoiceNumbers() throws SQLException {
 		ArrayList<Integer> invoiceNums = new ArrayList<Integer>();
 		try (Connection con = ConnectionDB.getConnection()) {
@@ -110,7 +126,9 @@ public class InvoiceDB {
 		return invoiceNums;
 	}
 
-	
+	/**
+	 * Creates a string of the Invoice Database.
+	 */
 	public String toString() 
 	{
 		String string ;
