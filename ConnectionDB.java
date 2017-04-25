@@ -1,6 +1,12 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+/**
+ * @date 4/21/20176
+ * @author Inno & Michael
+ * Basically same idea as SampleDataSource from the book.
+ * Just without looking through a file.
+ */
 
 public class ConnectionDB {
 
@@ -26,4 +32,3 @@ public class ConnectionDB {
 		return connection;
 	}
 }
-
