@@ -85,7 +85,6 @@ public class InvoiceDB {
 	/**
 	 * Check whether a certain taxID is already paid or not.
 	 * If the amount is zero then it is paid, otherwise not paid.
-	 * Uses the removeInvoice if it is already paid.
 	 * @param taxID - taxID of a customer.
 	 * @return Y for already paid. N for not yet paid
 	 * @throws SQLException
